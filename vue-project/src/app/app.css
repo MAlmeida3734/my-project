@@ -14,14 +14,25 @@ body{
     }
 
     .btn-primary {
-        @apply bg-purple-600 text-white hover:bg-purple-700;
+        @apply bg-purple-600 text-white;
+        
+        &hover{ 
+        @apply bg-purple-700;
+         };
     }
 
     .btn-secondary {
-        @apply bg-zinc-600 text-white hover: bg-zinc-700;
+        @apply bg-zinc-600 text-white; 
+        
+        &hover {
+         @apply bg-zinc-700;
+        }; 
     }
 
     .btn-danger {
-        @apply bg-red-600 text-white hover:bj-red-700;
+        @apply bg-red-600 text-white; 
+        &hover {
+            @apply bg-red-700;
+        };
     }
 }

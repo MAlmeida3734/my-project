@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import Title from '@/shared/components/Title.vue';
+import { useCounterStore } from '../stores/counter';
 
-
+ const counterStore = useCounterStore();
 </script>
 
 <template>
@@ -9,6 +10,17 @@ import Title from '@/shared/components/Title.vue';
         <Title text="Contador com Pinia"
         sub="Exemplo de contador utilizando Pinia para gerenciamento de estado"
         ></Title>
-        <div>Conteúdo</div>
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col">
+                <span class="text-4xl font-black">{{ counterStore.count }}</span>
+                <span class="text-zinc-500">Dobro: {{ counterStore.double }}</span>
+            </div>
+
+            <div class="flex gap-2">
+             <button class="btn btn-primary" @click="counterStore.increment()">+</button>
+            <button class="btn btn-secondary" @click="counterStore.decrement()">-</button>
+            <button class="btn btn-danger" @click="counterStore.reset()">Reset</button>
+            </div>
+        </div>
     </div>
 </template>
