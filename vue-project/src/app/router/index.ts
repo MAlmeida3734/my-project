@@ -1,9 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { routes } from "./routes";
+import { useAuthStore } from '@/modules/auth/stores/auth';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-})
+});
 
-export default router
+router.beforeEach(async (to) => {
+  const authStore = useAuthStore();
+
+  console.log(to.name,);
+
+  if(to.name !== "Auth" && to.meta.requiresAuth && !authStore.isAuthenticated) {
+    return {name:"Auth", query: { redirect: to.fullPath } };
+  }
+
+  if(authStore.isAuthenticated && to.name === "Auth") {
+    const redirect = (to.query.redirect as string) ?? {name: "Home"};
+    return redirect;
+  }
+});
+
+export default router;
